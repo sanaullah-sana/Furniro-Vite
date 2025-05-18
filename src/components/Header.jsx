@@ -26,30 +26,40 @@ function Header() {
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex space-x-20">
-          <Link
-            to="/"
-            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
-          >
-            Home
-          </Link>
-          <Link
-            to="/shop"
-            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
-          >
-            Shop
-          </Link>
-          <Link
-            to="/about"
-            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
-          >
-            About
-          </Link>
-          <Link
-            to="/contact"
-            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
-          >
-            Contact
-          </Link>
+          <ul className="flex space-x-20">
+            <li>
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/shop"
+                className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              >
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
         </div>
 
         {/* Desktop Icons */}
@@ -86,36 +96,44 @@ function Header() {
       {isNavOpen && (
         <div className="md:hidden bg-white dark:bg-gray-900 px-4 pb-4 space-y-4 border-t border-gray-200 dark:border-gray-700">
           {/* Navigation Links */}
-          <div className="flex flex-col space-y-3">
-            <Link
-              to="/"
-              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
-              onClick={() => setIsNavOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              to="/shop"
-              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
-              onClick={() => setIsNavOpen(false)}
-            >
-              Shop
-            </Link>
-            <Link
-              to="/about"
-              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
-              onClick={() => setIsNavOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
-              onClick={() => setIsNavOpen(false)}
-            >
-              Contact
-            </Link>
-          </div>
+          <ul className="flex flex-col space-y-3 mt-4">
+            <li>
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+                onClick={() => setIsNavOpen(false)}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/shop"
+                className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+                onClick={() => setIsNavOpen(false)}
+              >
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+                onClick={() => setIsNavOpen(false)}
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+                onClick={() => setIsNavOpen(false)}
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
 
           {/* Icons */}
           <div className="flex space-x-6 justify-center text-gray-700 dark:text-white">
