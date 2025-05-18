@@ -1,0 +1,171 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import introImg from "../assets/img/intro-section-img.jpg";
+import varietyOne from "../assets/img/bedroom.jpg";
+import varietyTwo from "../assets/img/dining.jpg";
+import varietyThree from "../assets/img/living.jpg";
+import Slider from "../components/Slider";
+
+function Home() {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  const fetchProducts = async () => {
+    const res = await fetch(
+      "https://api.escuelajs.co/api/v1/products?offset=0&limit=6",
+    );
+    const data = await res.json();
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+  console.log(products);
+  return (
+    <>
+      <main>
+        {/* Hero Section */}
+        <section className="w-screen">
+          <div className="relative">
+            {/* Intro Banner Image */}
+            <img
+              src={introImg}
+              alt="Intro-Banner-Image"
+              className="lg:w-full h-auto object-cover"
+            />
+            {/* /Intro Banner Image */}
+            {/* Intro Contents */}
+            <div className="absolute lg:top-40 lg:right-15 md:top-24 top-0 right-8 bg-[#FFF3E3] lg:w-[643px] lg:h-[443px] md:w-[300px] md:h-[250px] w-[250px] h-[230px] lg:py-12 lg:px-10 py-6 px-5">
+              <h3 className="font-semibold lg:text-base lg:tracking-widest lg:mb-3 mb-1 md:text-sm text-xs font-poppins">
+                New Arrival
+              </h3>
+              <h1 className="font-semibold lg:text-[3.25rem] lg:leading-[55px] text-[#B88E2F] lg:mb-4 mb-2 text-2xl font-poppins">
+                Discover Our
+                <br /> New Collection
+              </h1>
+              <p className="font-medium lg:text-lg lg:leading-[24px] lg:mb-6 text-[0.7rem] font-poppins">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
+                <br className="lg:block hidden" /> elit tellus, luctus nec
+                ullamcorper mattis.
+              </p>
+              <button
+                onClick={() => navigate("/shop")}
+                type="button"
+                className="bg-[#B88E2F] lg:py-4 lg:px-12 py-2 px-6 mt-4 text-white lg:text-base font-semibold text-xs cursor-pointer font-poppins"
+              >
+                Buy Now
+              </button>
+            </div>
+            {/* /Intro Contents */}
+          </div>
+        </section>
+        {/* /Hero Section */}
+        {/* Slider */}
+        <Slider />
+        {/* /Slider */}
+        {/* Varieties Section */}
+        <section className="varieties-section">
+          <div className="container max-w-[1183px] mx-auto my-10">
+            <div>
+              <h3 className="font-bold lg:text-[2rem] md:text-[1.5rem] text-[1rem] text-center">
+                Browse The Range
+              </h3>
+              <p className="text-center lg:text-[1.25rem] md:text-base text-[0.7rem]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
+            {/* Grid  */}
+            <div className="grid lg:grid-cols-3 grid-cols-2 gap-5 my-5">
+              <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+                <img src={varietyOne} alt="Dining" className="mx-auto w-100" />
+                <h4 class="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
+                  Dining
+                </h4>
+              </div>
+              <div class="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+                <img src={varietyTwo} alt="Living" className="mx-auto w-100" />
+                <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
+                  Living
+                </h4>
+              </div>
+              <div class="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+                <img
+                  src={varietyThree}
+                  alt="Bedroom"
+                  className="mx-auto w-100"
+                />
+                <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
+                  Bedroom
+                </h4>
+              </div>
+            </div>
+            {/* /Grid */}
+          </div>
+        </section>
+        {/* /Varieties Section */}
+
+        {/* Featured Products */}
+        <h2 className="text-4xl font-semibold text-center font-poppins my-4">
+          Our Products
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+          {products.map((product) => (
+            <div key={product.id} className="relative group">
+              {/* Product Image */}
+              <img
+                src={product.images[0]}
+                alt={product.title}
+                className="w-full h-64 object-cover pb-3 transition-opacity duration-300 group-hover:opacity-70"
+              />
+
+              {/* Hover Button Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 cursor-pointer">
+                <button className="bg-white text-[#B88E2F] font-semibold lg:text-base md-text-sm text-xs px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300">
+                  Add to Cart
+                </button>
+              </div>
+
+              {/* Title */}
+              <h4 className="font-semibold lg:text-[1.5rem] md:text-lg text-base lg:mt-2 lg:pl-0 pl-5">
+                {product.title}
+              </h4>
+              {/* ID */}
+              <h6>ID: {product.id}</h6>
+              {/* Category */}
+              <h6>Category: {product.category.name}</h6>
+              {/* Description */}
+              <h6 className="lg:text-base md:text-sm text-xs text-gray-500 lg:pl-0 pl-5">
+                {product.description.slice(0, 40)}
+              </h6>
+
+              {/* Price */}
+              <div className="flex lg:flex-row flex-col lg:items-center items-start lg:gap-5 gap-0">
+                <h5 className="lg:text-xl md:text-lg text-base font-semibold lg:pl-0 pl-5">
+                  ${product.price}
+                </h5>
+                <h6 className="lg:text-base md:text-sm text-xs text-[#B0B0B0] line-through lg:pl-0 pl-5">
+                  ${Math.round(product.price * 1.4)}
+                </h6>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* View All Products Button */}
+        <div className="text-center mt-6 mb-10">
+<button onClick={() => navigate('/shop')} className="relative overflow-hidden border border-[#B88E2F] lg:px-18 px-5 lg:py-3 py-2 font-semibold lg:text-base text-sm text-[#B88E2F] group cursor-pointer">
+  <span className="relative z-10 text-[#B88E2F] group-hover:text-white transition duration-300">
+    Show More
+  </span>
+  <span className="absolute inset-0 bg-[#B88E2F] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></span>
+</button>
+
+
+        </div>
+      </main>
+    </>
+  );
+}
+
+export default Home;
