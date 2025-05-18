@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,76 +7,127 @@ import {
   faShoppingCart,
   faUser,
   faHeart,
+  faBars,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
-  return (
-    <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl mx-auto p-4 flex items-center justify-between">
-          {/* Column 1: Logo */}
-          <div className="flex items-center space-x-3">
-            <Link to="/">
-              <img src={logo} alt="Logo" className="h-8 w-auto" />
-            </Link>
-          </div>
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
-          {/* Column 2: Navigation Links */}
-          <div className="hidden md:flex space-x-20">
+  return (
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 relative">
+      <div className="max-w-screen-xl mx-auto p-4 flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center space-x-3">
+          <Link to="/">
+            <img src={logo} alt="Logo" className="h-8 w-auto" />
+          </Link>
+        </div>
+
+        {/* Desktop Navigation Links */}
+        <div className="hidden md:flex space-x-20">
+          <Link
+            to="/"
+            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+          >
+            Home
+          </Link>
+          <Link
+            to="/shop"
+            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+          >
+            Shop
+          </Link>
+          <Link
+            to="/about"
+            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+          >
+            About
+          </Link>
+          <Link
+            to="/contact"
+            className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* Desktop Icons */}
+        <div className="hidden md:flex items-center space-x-4">
+          <FontAwesomeIcon
+            icon={faUser}
+            className="text-gray-700 dark:text-white cursor-pointer"
+          />
+          <FontAwesomeIcon
+            icon={faSearch}
+            className="text-gray-700 dark:text-white cursor-pointer"
+          />
+          <FontAwesomeIcon
+            icon={faShoppingCart}
+            className="text-gray-700 dark:text-white cursor-pointer"
+          />
+          <FontAwesomeIcon
+            icon={faHeart}
+            className="text-gray-700 dark:text-white cursor-pointer"
+          />
+        </div>
+
+        {/* Mobile Hamburger Button */}
+        <button
+          className="md:hidden text-gray-700 dark:text-white focus:outline-none"
+          onClick={() => setIsNavOpen(!isNavOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          <FontAwesomeIcon icon={isNavOpen ? faTimes : faBars} size="lg" />
+        </button>
+      </div>
+
+      {/* Mobile Navigation (links + icons) */}
+      {isNavOpen && (
+        <div className="md:hidden bg-white dark:bg-gray-900 px-4 pb-4 space-y-4 border-t border-gray-200 dark:border-gray-700">
+          {/* Navigation Links */}
+          <div className="flex flex-col space-y-3">
             <Link
               to="/"
-              className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+              onClick={() => setIsNavOpen(false)}
             >
               Home
             </Link>
             <Link
               to="/shop"
-              className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+              onClick={() => setIsNavOpen(false)}
             >
               Shop
             </Link>
             <Link
               to="/about"
-              className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+              onClick={() => setIsNavOpen(false)}
             >
               About
             </Link>
             <Link
               to="/contact"
-              className="text-gray-700 hover:text-black focus:underline dark:text-white font-medium font-poppins"
+              className="text-gray-700 hover:text-black dark:text-white font-medium font-poppins"
+              onClick={() => setIsNavOpen(false)}
             >
               Contact
             </Link>
           </div>
 
-          {/* Column 3: Icons */}
-          <div className="flex items-center space-x-4">
-            {/* Replace with real icons or use react-icons */}
-            <span className="text-gray-700 dark:text-white cursor-pointer">
-              <FontAwesomeIcon
-                icon={faUser}
-                className="text-gray-700 dark:text-white cursor-pointer"
-              />
-            </span>
-            <span className="text-gray-700 dark:text-white cursor-pointer">
-              <FontAwesomeIcon
-                icon={faSearch}
-                className="text-gray-700 dark:text-white cursor-pointer"
-              />
-            </span>
-            <span className="text-gray-700 dark:text-white cursor-pointer">
-              <FontAwesomeIcon
-                icon={faShoppingCart}
-                className="text-gray-700 dark:text-white cursor-pointer"
-              />
-            </span>
-            <span className="text-gray-700 dark:text-white cursor-pointer">
-              <FontAwesomeIcon icon={faHeart} />
-            </span>
+          {/* Icons */}
+          <div className="flex space-x-6 justify-center text-gray-700 dark:text-white">
+            <FontAwesomeIcon icon={faUser} className="cursor-pointer" />
+            <FontAwesomeIcon icon={faSearch} className="cursor-pointer" />
+            <FontAwesomeIcon icon={faShoppingCart} className="cursor-pointer" />
+            <FontAwesomeIcon icon={faHeart} className="cursor-pointer" />
           </div>
         </div>
-      </nav>
-    </>
+      )}
+    </nav>
   );
 }
+
 export default Header;
