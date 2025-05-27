@@ -113,16 +113,18 @@ function Home() {
         </h2>
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
   {products.map((product) => (
-    <div key={product.id} className="bg-white rounded-md shadow p-4 flex flex-col">
-      
-      {/* Image Wrapper with Overlay */}
+    <div
+      key={product.id}
+      className="bg-white rounded-md shadow p-4 flex flex-col group"
+    >
+      {/* Image Wrapper with Aspect Ratio & Overlay */}
       <div className="relative aspect-w-4 aspect-h-3">
         <img
           src={product.images[0]}
           alt={product.title}
           className="object-cover w-full h-full rounded-md transition-opacity duration-300 group-hover:opacity-70"
         />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 cursor-pointer">
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-md cursor-pointer">
           <button className="bg-white text-[#B88E2F] font-semibold text-sm px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300">
             Add to Cart
           </button>
@@ -133,7 +135,7 @@ function Home() {
       <div className="mt-4">
         <h4 className="font-semibold text-lg">{product.title}</h4>
         <h6 className="text-sm text-gray-500">ID: {product.id}</h6>
-        <h6 className="text-sm text-gray-500">Category: {product.category.name}</h6>
+        <h6 className="text-sm text-gray-500 capitalize">Category: {product.category?.name}</h6>
         <p className="text-sm text-gray-600">{product.description.slice(0, 40)}...</p>
 
         {/* Price */}
@@ -147,6 +149,9 @@ function Home() {
     </div>
   ))}
 </div>
+
+
+
 
 
         {/* View All Products Button */}
