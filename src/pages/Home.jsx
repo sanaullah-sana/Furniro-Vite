@@ -33,6 +33,7 @@ function Home() {
               src={introImg}
               alt="Intro-Banner-Image"
               className="lg:w-full h-auto object-cover"
+              width={1200} height={700}
             />
             {/* /Intro Banner Image */}
             {/* Intro Contents */}
@@ -78,13 +79,13 @@ function Home() {
             {/* Grid  */}
             <div className="grid lg:grid-cols-3 grid-cols-2 gap-5 my-5">
               <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
-                <img src={varietyOne} alt="Dining" className="mx-auto w-100" />
+                <img src={varietyOne} alt="Dining" className="mx-auto w-100" width={800} height={500} />
                 <h4 class="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
                   Dining
                 </h4>
               </div>
               <div class="hover:scale-105 hover:shadow-lg transition-transform duration-300">
-                <img src={varietyTwo} alt="Living" className="mx-auto w-100" />
+                <img src={varietyTwo} alt="Living" className="mx-auto w-100" width={800} height={500} />
                 <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
                   Living
                 </h4>
@@ -94,6 +95,7 @@ function Home() {
                   src={varietyThree}
                   alt="Bedroom"
                   className="mx-auto w-100"
+                  width={800} height={500}
                 />
                 <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
                   Bedroom
@@ -109,48 +111,43 @@ function Home() {
         <h2 className="text-4xl font-semibold text-center font-poppins my-4">
           Our Products
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-          {products.map((product) => (
-            <div key={product.id} className="relative group">
-              {/* Product Image */}
-              <img
-                src={product.images[0]}
-                alt={product.title}
-                className="w-full h-64 object-cover pb-3 transition-opacity duration-300 group-hover:opacity-70"
-              />
-
-              {/* Hover Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 cursor-pointer">
-                <button className="bg-white text-[#B88E2F] font-semibold lg:text-base md-text-sm text-xs px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300">
-                  Add to Cart
-                </button>
-              </div>
-
-              {/* Title */}
-              <h4 className="font-semibold lg:text-[1.5rem] md:text-lg text-base lg:mt-2 lg:pl-0 pl-5">
-                {product.title}
-              </h4>
-              {/* ID */}
-              <h6>ID: {product.id}</h6>
-              {/* Category */}
-              <h6>Category: {product.category.name}</h6>
-              {/* Description */}
-              <h6 className="lg:text-base md:text-sm text-xs text-gray-500 lg:pl-0 pl-5">
-                {product.description.slice(0, 40)}
-              </h6>
-
-              {/* Price */}
-              <div className="flex lg:flex-row flex-col lg:items-center items-start lg:gap-5 gap-0">
-                <h5 className="lg:text-xl md:text-lg text-base font-semibold lg:pl-0 pl-5">
-                  ${product.price}
-                </h5>
-                <h6 className="lg:text-base md:text-sm text-xs text-[#B0B0B0] line-through lg:pl-0 pl-5">
-                  ${Math.round(product.price * 1.4)}
-                </h6>
-              </div>
-            </div>
-          ))}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+  {products.map((product) => (
+    <div key={product.id} className="bg-white rounded-md shadow p-4 flex flex-col">
+      
+      {/* Image Wrapper with Overlay */}
+      <div className="relative aspect-w-4 aspect-h-3">
+        <img
+          src={product.images[0]}
+          alt={product.title}
+          className="object-cover w-full h-full rounded-md transition-opacity duration-300 group-hover:opacity-70"
+        />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 cursor-pointer">
+          <button className="bg-white text-[#B88E2F] font-semibold text-sm px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300">
+            Add to Cart
+          </button>
         </div>
+      </div>
+
+      {/* Product Info */}
+      <div className="mt-4">
+        <h4 className="font-semibold text-lg">{product.title}</h4>
+        <h6 className="text-sm text-gray-500">ID: {product.id}</h6>
+        <h6 className="text-sm text-gray-500">Category: {product.category.name}</h6>
+        <p className="text-sm text-gray-600">{product.description.slice(0, 40)}...</p>
+
+        {/* Price */}
+        <div className="flex items-center gap-4 mt-2">
+          <h5 className="text-lg font-semibold">${product.price}</h5>
+          <h6 className="text-sm text-[#B0B0B0] line-through">
+            ${Math.round(product.price * 1.4)}
+          </h6>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
 
         {/* View All Products Button */}
         <div className="text-center mt-6 mb-10">

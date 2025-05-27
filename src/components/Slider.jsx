@@ -21,13 +21,13 @@ function Slider() {
         className="mySwiper md:my-8 my-16"
       >
         <SwiperSlide className="text-center">
-          <img src={swiperBanner1} alt="Swipper-Banner-1" />
+          <img src={swiperBanner1} alt="Swipper-Banner-1" className="w-full h-auto" width={3000} height={688} />
         </SwiperSlide>
         <SwiperSlide className="text-center">
-          <img src={swiperBanner2} alt="Swipper-Banner-1" />
+          <img src={swiperBanner2} alt="Swipper-Banner-2" className="w-full h-auto" width={3000} height={688} />
         </SwiperSlide>
         <SwiperSlide className="text-center">
-          <img src={swiperBanner3} alt="Swipper-Banner-1" />
+          <img src={swiperBanner3} alt="Swipper-Banner-3" className="w-full h-auto" width={3000} height={688} />
         </SwiperSlide>
       </Swiper>
     </>

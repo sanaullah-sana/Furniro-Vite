@@ -33,58 +33,45 @@ function Shop() {
             <h2 className="text-4xl font-semibold text-center font-poppins my-4">
           Our Products
         </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-        {prods.map((currElem) => (
-          <div
-            key={currElem.id}
-            className="relative group bg-white rounded-lg shadow-md p-4"
-          >
-            {/* Product Image */}
-            <img
-              src={currElem.images[0]}
-              alt={currElem.title}
-              className="w-full h-48 object-cover pb-3 transition-opacity duration-300 group-hover:opacity-70 rounded"
-            />
-
-            {/* Hover Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 cursor-pointer rounded">
-              <button className="bg-white text-[#B88E2F] font-semibold lg:text-base md:text-sm text-xs px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300">
-                Add to Cart
-              </button>
-            </div>
-
-            {/* Title */}
-            <h4 className="font-semibold lg:text-[1.5rem] md:text-lg text-base lg:mt-2 lg:pl-0 pl-2">
-              {currElem.title}
-            </h4>
-
-            {/* ID */}
-            <h6 className="lg:text-base md:text-sm text-xs text-gray-500 lg:pl-0 pl-2">
-              ID: {currElem.id}
-            </h6>
-
-            {/* Category */}
-            <h6 className="lg:text-base md:text-sm text-xs text-gray-500 lg:pl-0 pl-2">
-              Category: {currElem.category?.name}
-            </h6>
-
-            {/* Description */}
-            <h6 className="lg:text-base md:text-sm text-xs text-gray-500 lg:pl-0 pl-2">
-              {currElem.description.slice(0, 40)}...
-            </h6>
-
-            {/* Price */}
-            <div className="flex lg:flex-row flex-col lg:items-center items-start lg:gap-5 gap-0 lg:pl-0 pl-2">
-              <h5 className="lg:text-xl md:text-lg text-base font-semibold">
-                ${currElem.price}
-              </h5>
-              <h6 className="lg:text-base md:text-sm text-xs text-[#B0B0B0] line-through">
-                ${Math.round(currElem.price * 1.4)}
-              </h6>
-            </div>
-          </div>
-        ))}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+  {prods.map((currElem) => (
+    <div
+      key={currElem.id}
+      className="bg-white rounded-md shadow p-4 flex flex-col group"
+    >
+      {/* Image Wrapper with Overlay */}
+      <div className="relative aspect-w-4 aspect-h-3">
+        <img
+          src={currElem.images[0]}
+          alt={currElem.title}
+          className="object-cover w-full h-full rounded-md transition-opacity duration-300 group-hover:opacity-70"
+        />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-md cursor-pointer">
+          <button className="bg-white text-[#B88E2F] font-semibold text-sm px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300">
+            Add to Cart
+          </button>
+        </div>
       </div>
+
+      {/* Product Info */}
+      <div className="mt-4">
+        <h4 className="font-semibold text-lg">{currElem.title}</h4>
+        <h6 className="text-sm text-gray-500">ID: {currElem.id}</h6>
+        <h6 className="text-sm text-gray-500">Category: {currElem.category?.name}</h6>
+        <p className="text-sm text-gray-600">{currElem.description.slice(0, 40)}...</p>
+
+        {/* Price */}
+        <div className="flex items-center gap-4 mt-2">
+          <h5 className="text-lg font-semibold">${currElem.price}</h5>
+          <h6 className="text-sm text-[#B0B0B0] line-through">
+            ${Math.round(currElem.price * 1.4)}
+          </h6>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
 
     </>
   );

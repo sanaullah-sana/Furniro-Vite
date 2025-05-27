@@ -20,7 +20,7 @@ function Header() {
         {/* Logo */}
         <div className="flex items-center space-x-3">
           <Link to="/">
-            <img src={logo} alt="Logo" className="h-8 w-auto" />
+            <img src={logo} alt="Logo" className="h-8 w-auto" width={100} height={32} />
           </Link>
         </div>
 
