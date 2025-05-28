@@ -5,6 +5,7 @@ import varietyOne from "../assets/img/bedroom.jpg";
 import varietyTwo from "../assets/img/dining.jpg";
 import varietyThree from "../assets/img/living.jpg";
 import Slider from "../components/Slider";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ function Home() {
   useEffect(() => {
     fetchProducts();
   }, []);
-  console.log(products);
+
   return (
     <>
       <main>
@@ -80,17 +81,17 @@ function Home() {
             <div className="grid lg:grid-cols-3 grid-cols-2 gap-5 my-5">
               <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
                 <img src={varietyOne} alt="Dining" className="mx-auto w-100" width={800} height={500} />
-                <h4 class="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
+                <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
                   Dining
                 </h4>
               </div>
-              <div class="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+              <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
                 <img src={varietyTwo} alt="Living" className="mx-auto w-100" width={800} height={500} />
                 <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
                   Living
                 </h4>
               </div>
-              <div class="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+              <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
                 <img
                   src={varietyThree}
                   alt="Bedroom"
@@ -111,10 +112,11 @@ function Home() {
         <h2 className="text-4xl font-semibold text-center font-poppins my-4">
           Our Products
         </h2>
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
   {products.map((product) => (
-    <div
+    <Link
       key={product.id}
+      to={`/cart/${product.id}`}
       className="bg-white rounded-md shadow p-4 flex flex-col group"
     >
       {/* Image Wrapper with Aspect Ratio & Overlay */}
@@ -125,8 +127,23 @@ function Home() {
           className="object-cover w-full h-full rounded-md transition-opacity duration-300 group-hover:opacity-70"
         />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-md cursor-pointer">
-          <button className="bg-white text-[#B88E2F] font-semibold text-sm px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300">
+          {/* You can keep or remove this button since whole card is clickable */}
+          <button className="hidden lg:flex items-center gap-2 bg-white text-[#B88E2F] font-semibold text-sm px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300 cursor-pointer group">
             Add to Cart
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 3h1.5l1.35 9.45a1.5 1.5 0 001.49 1.29h10.92a1.5 1.5 0 001.49-1.29l1.35-9.45h1.5M6 21a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm12 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+              />
+            </svg>
           </button>
         </div>
       </div>
@@ -135,7 +152,9 @@ function Home() {
       <div className="mt-4">
         <h4 className="font-semibold text-lg">{product.title}</h4>
         <h6 className="text-sm text-gray-500">ID: {product.id}</h6>
-        <h6 className="text-sm text-gray-500 capitalize">Category: {product.category?.name}</h6>
+        <h6 className="text-sm text-gray-500 capitalize">
+          Category: {product.category?.name}
+        </h6>
         <p className="text-sm text-gray-600">{product.description.slice(0, 40)}...</p>
 
         {/* Price */}
@@ -144,9 +163,26 @@ function Home() {
           <h6 className="text-sm text-[#B0B0B0] line-through">
             ${Math.round(product.price * 1.4)}
           </h6>
+          <button className="block lg:hidden bg-gray-800 text-[#ffffff] font-semibold text-sm px-4 py-2 rounded shadow transition-colors duration-300 cursor-pointer hover:bg-[#B88E2F] flex items-center gap-2 group">
+            Add to Cart
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 3h1.5l1.35 9.45a1.5 1.5 0 001.49 1.29h10.92a1.5 1.5 0 001.49-1.29l1.35-9.45h1.5M6 21a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm12 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
-    </div>
+    </Link>
   ))}
 </div>
 

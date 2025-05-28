@@ -27,7 +27,7 @@ function Footer() {
               </address>
 
               <p className="md:text-base text-sm text-black lg:py-16 pb-5">
-                2025 furino. All rights reverved By Sana
+                &copy; Copyright 2025 furino. All rights reverved By Sana
               </p>
             </div>
             {/* /Footer Column 1  */}

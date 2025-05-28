@@ -13,6 +13,8 @@ import Payment from "./pages/Payment";
 import Returns from "./pages/Returns";
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Admin from "./pages/Admin";
+import Cart from "./pages/Cart";
+import Checkout from './pages/Checkout';
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart/:id" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/users" element={<User />}>
           <Route path=":userId" element={<UserDetails />} />
           <Route path="admin" element={<Admin />} />
