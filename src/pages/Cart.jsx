@@ -25,90 +25,85 @@ function Cart() {
 
   const handleIncrease = () => setQuantity(prev => prev + 1);
   const handleDecrease = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
-  const handleRemove = () => {
-    // Go back or redirect user after removing (you can enhance logic)
-    navigate('/');
-  };
+  const handleRemove = () => navigate('/');
 
   const totalPrice = Math.round(prods.price * quantity);
 
-return (
+  return (
     <>
       {/* Hero Section */}
-      <section className="hero-section bg-shop-hero-img bg-cover bg-center w-full min-h-full lg:h-[316px] md:h-[400px] h-[300px] overflow-x-hidden flex items-center justify-center">
-  <div>
-      <img src={introBannerIcon} alt="Intro-Banner-Icon" className="lg:ml-3 md:ml-2 ml-0" />
-    <h2 className="font-medium lg:text-5xl md:text-4xl text-3xl">Cart</h2>
-    <div className="flex items-center py-2">
-      <h6 className="lg:text-base md:text-sm text-xs font-semibold">Home</h6>
-      &nbsp;&gt;&nbsp;
-      <h6 className="lg:text-base md:text-sm text-xs font-light">Cart</h6>
-    </div>
-  </div>
-</section>
-    {/* /Hero Section */}
-<div className="max-w-3xl mx-auto p-4">
-  {/* Cart item in one row */}
-  <div className="flex items-center gap-6 border rounded-lg p-4 shadow-md">
-    {/* Image */}
-    <img
-      src={prods.images?.[0]}
-      alt={prods.title}
-      className="w-40 h-40 object-cover rounded-md"
-    />
+      <section className="hero-section bg-shop-hero-img bg-cover bg-center w-full min-h-full lg:h-[316px] md:h-[400px] h-[300px] overflow-x-hidden flex items-center justify-center text-center px-4">
+        <div>
+          <img src={introBannerIcon} alt="Intro-Banner-Icon" className="mx-auto mb-2" />
+          <h2 className="font-medium lg:text-5xl md:text-4xl text-3xl">Cart</h2>
+          <div className="flex justify-center items-center py-2 text-xs sm:text-sm">
+            <h6 className="font-semibold">Home</h6>
+            &nbsp;&gt;&nbsp;
+            <h6 className="font-light">Cart</h6>
+          </div>
+        </div>
+      </section>
 
-    {/* Title & Price */}
-    <div className="flex-1">
-      <h2 className="text-xl font-semibold">{prods.title}</h2>
-      <h3 className="text-lg text-gray-600">Price: ${prods.price}</h3>
-    </div>
+      {/* Cart Content */}
+      <div className="max-w-3xl mx-auto p-4">
+        {/* Cart item */}
+        <div className="flex flex-col sm:flex-row items-center gap-6 border rounded-lg p-4 shadow-md">
+          {/* Image */}
+          <img
+            src={prods.images?.[0]}
+            alt={prods.title}
+            className="w-full sm:w-32 h-32 object-cover rounded-md"
+          />
 
-    {/* Quantity Selector */}
-    <div className="flex items-center gap-4">
-<button
-  onClick={handleDecrease}
-  className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 hover:border-gray-600 cursor-pointer"
->
-  −
-</button>
-      <span className="font-medium">{quantity}</span>
-<button
-  onClick={handleIncrease}
-  className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 hover:border-gray-600 cursor-pointer"
->
-  +
-</button>
+          {/* Title & Price */}
+          <div className="flex-1 text-center sm:text-left">
+            <h2 className="text-lg sm:text-xl font-semibold">{prods.title}</h2>
+            <h3 className="text-base text-gray-600">Price: ${prods.price}</h3>
+          </div>
 
-    </div>
+          {/* Quantity Controls */}
+          <div className="flex items-center gap-3 mt-2 sm:mt-0">
+            <button
+              onClick={handleDecrease}
+              className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 hover:border-gray-600"
+            >
+              −
+            </button>
+            <span className="font-medium">{quantity}</span>
+            <button
+              onClick={handleIncrease}
+              className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 hover:border-gray-600"
+            >
+              +
+            </button>
+          </div>
 
-    {/* Remove Button */}
-    <button
-      onClick={handleRemove}
-      className="bg-gray-600 text-white px-4 py-2 rounded cursor-pointer"
-    >
-      Delete
-    </button>
-  </div>
+          {/* Remove Button */}
+          <button
+            onClick={handleRemove}
+            className="mt-3 sm:mt-0 bg-gray-600 text-white px-3 py-2 rounded text-sm sm:text-base"
+          >
+            Delete
+          </button>
+        </div>
 
-  {/* Total price below the row */}
-  <div className="mt-4 text-right font-poppins font-bold text-base">
-    Total Price: ${Math.round(prods.price * quantity)}
-  </div>
+        {/* Total Price */}
+        <div className="mt-4 text-right font-bold text-sm sm:text-base">
+          Total Price: ${totalPrice}
+        </div>
 
-  {/* Proceed to Checkout button */}
-  <div className="mt-4">
-    <button
-      onClick={() => navigate('/checkout')}
-      className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded font-semibold cursor-pointer"
-    >
-      Proceed to Checkout
-    </button>
-  </div>
-</div>
-
-  </>
-);
-
+        {/* Checkout Button */}
+        <div className="mt-4">
+          <button
+            onClick={() => navigate('/checkout')}
+            className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded font-semibold"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Cart;
