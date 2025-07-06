@@ -1,89 +1,107 @@
-import React, { useState, useEffect } from "react";
-import introBannerIcon from '../assets/furniro-icon.svg';
+// src/Shop.jsx
+import React, { useEffect } from "react";
+import introBannerIcon from "../assets/furniro-icon.svg";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AddData } from "../store/ProductsData";
+import { useDispatch, useSelector } from "react-redux";
 
 function Shop() {
-
-const navigate = useNavigate();
-
-  const [prods, setProds] = useState([]);
-
-  const fetchData = async () => {
-    let res = await fetch("https://api.escuelajs.co/api/v1/products");
-    const products = await res.json();
-    console.log(products);
-    setProds(products);
-  };
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.prodsData.data);
 
   useEffect(() => {
-    fetchData();
+    axios
+      .get("https://api.escuelajs.co/api/v1/products")
+      .then((res) => dispatch(AddData(res.data)))
+      .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
   return (
     <>
       {/* Hero Section */}
-      <section class="hero-section bg-shop-hero-img bg-cover bg-center w-full min-h-full lg:h-[316px] md:h-[400px] h-[300px] overflow-x-hidden flex items-center justify-center">
-  <div>
-      <img src={introBannerIcon} alt="Intro-Banner-Icon" className="lg:ml-4 md:ml-3 ml-0" />
-    <h2 class="font-medium lg:text-5xl md:text-4xl text-3xl">Shop</h2>
-    <div class="flex items-center py-2">
-      <h6 class="lg:text-base md:text-sm text-xs font-semibold">Home</h6>
-      &nbsp;&gt;&nbsp;
-      <h6 class="lg:text-base md:text-sm text-xs font-light">Shop</h6>
-    </div>
-  </div>
-</section>
-    {/* /Hero Section */}
-            <h2 className="text-4xl font-semibold text-center font-poppins my-4">
-          Our Products
-        </h2>
+      <section className="hero-section bg-shop-hero-img bg-cover bg-center w-full min-h-full lg:h-[316px] md:h-[400px] h-[300px] overflow-x-hidden flex items-center justify-center">
+        <div>
+          <img src={introBannerIcon} alt="Intro-Banner-Icon" className="lg:ml-4 md:ml-3 ml-0" />
+          <h2 className="font-medium lg:text-5xl md:text-4xl text-3xl">Shop</h2>
+          <div className="flex items-center py-2">
+            <h6 className="lg:text-base md:text-sm text-xs font-semibold">Home</h6>
+            &nbsp;&gt;&nbsp;
+            <h6 className="lg:text-base md:text-sm text-xs font-light">Shop</h6>
+          </div>
+        </div>
+      </section>
 
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-  {prods.map((product) => (
-    <Link
-      to={`/cart/${product.id}`}
-      key={product.id}
-      className="bg-white rounded-md shadow p-4 flex flex-col group no-underline"
-    >
-      {/* Image Wrapper with Overlay */}
-      <div className="relative aspect-w-4 aspect-h-3">
-        <img
-          src={product.images[0]}
-          alt={product.title}
-          className="object-cover w-full h-full rounded-md transition-opacity duration-300 group-hover:opacity-70"
-        />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-md cursor-pointer">
-          <button
-            onClick={() => navigate('cart/:id') } // prevent navigation when button clicked, optional
-            className="bg-white text-[#B88E2F] font-semibold text-sm px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300"
+      {/* Products Grid */}
+      <h2 className="text-4xl font-semibold text-center font-poppins my-4">Our Products</h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+        {data.map((product) => (
+          <Link
+            key={product.id}
+            to={`/cart/${product.id}`}
+            className="bg-white rounded-md shadow p-4 flex flex-col group no-underline"
           >
-            Add to Cart
-          </button>
-        </div>
+            <div className="relative h-64"> {/* ← Use aspect-w-4 aspect-h-3 if plugin added */}
+              <img
+                src={product.images[0]}
+                alt={product.title}
+                className="object-cover w-full h-full rounded-md transition-opacity duration-300 group-hover:opacity-70"
+              />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-md cursor-pointer">
+                <button className="hidden lg:flex items-center gap-2 bg-white text-[#B88E2F] font-semibold text-sm px-4 py-2 rounded shadow hover:bg-gray-800 hover:text-white transition-colors duration-300 group">
+                  Add to Cart
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.25 3h1.5l1.35 9.45a1.5 1.5 0 001.49 1.29h10.92a1.5 1.5 0 001.49-1.29l1.35-9.45h1.5M6 21a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm12 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Product Info */}
+            <div className="mt-4">
+              <h4 className="font-semibold text-lg">{product.title}</h4>
+              <h6 className="text-sm text-gray-500">ID: {product.id}</h6>
+              <h6 className="text-sm text-gray-500 capitalize">Category: {product.category?.name}</h6>
+              <p className="text-sm text-gray-600">{product.description.slice(0, 40)}...</p>
+              <div className="flex items-center gap-4 mt-2 flex-wrap">
+                <h5 className="text-lg font-semibold">${product.price}</h5>
+                <h6 className="text-sm text-[#B0B0B0] line-through">
+                  ${Math.round(product.price * 1.4)}
+                </h6>
+                <button className="block lg:hidden bg-gray-800 text-white font-semibold text-sm px-4 py-2 rounded shadow transition-colors duration-300 hover:bg-[#B88E2F] flex items-center gap-2 group">
+                  Add to Cart
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.25 3h1.5l1.35 9.45a1.5 1.5 0 001.49 1.29h10.92a1.5 1.5 0 001.49-1.29l1.35-9.45h1.5M6 21a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm12 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
-
-      {/* Product Info */}
-      <div className="mt-4">
-        <h4 className="font-semibold text-lg">{product.title}</h4>
-        <h6 className="text-sm text-gray-500">ID: {product.id}</h6>
-        <h6 className="text-sm text-gray-500">Category: {product.category?.name}</h6>
-        <p className="text-sm text-gray-600">{product.description.slice(0, 40)}...</p>
-
-        {/* Price */}
-        <div className="flex items-center gap-4 mt-2">
-          <h5 className="text-lg font-semibold">${product.price}</h5>
-          <h6 className="text-sm text-[#B0B0B0] line-through">
-            ${Math.round(product.price * 1.4)}
-          </h6>
-        </div>
-      </div>
-    </Link>
-  ))}
-</div>
-
-
-
     </>
   );
 }

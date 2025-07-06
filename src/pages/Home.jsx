@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import introImg from "../assets/img/intro-section-img.jpg";
 import varietyOne from "../assets/img/bedroom.jpg";
@@ -8,20 +9,11 @@ import Slider from "../components/Slider";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const [products, setProducts] = useState([]);
+const products = useSelector((state) => state.prodsData.data.slice(0, 6)); // limit 6 products
+
   const navigate = useNavigate();
 
-  const fetchProducts = async () => {
-    const res = await fetch(
-      "https://api.escuelajs.co/api/v1/products?offset=0&limit=6",
-    );
-    const data = await res.json();
-    setProducts(data);
-  };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <>
