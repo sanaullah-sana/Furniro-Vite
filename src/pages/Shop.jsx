@@ -2,29 +2,28 @@
 import React, { useEffect } from "react";
 import introBannerIcon from "../assets/furniro-icon.svg";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { AddData } from "../store/ProductsData";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/ProductsData";
 
 function Shop() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.prodsData.data);
+  const products = useSelector((state) => state.prodsData.data);
+  const status = useSelector((state) => state.prodsData.status);
 
   useEffect(() => {
-    axios
-      .get("https://api.escuelajs.co/api/v1/products")
-      .then((res) => dispatch(AddData(res.data)))
-      .catch((err) => console.error("Error fetching data:", err));
-  }, []);
+    if (status === "idle") {
+      dispatch(fetchProducts());
+    }
+  }, [status, dispatch]);
 
   return (
     <>
       {/* Hero Section */}
       <section className="hero-section bg-shop-hero-img bg-cover bg-center w-full min-h-full lg:h-[316px] md:h-[400px] h-[300px] overflow-x-hidden flex items-center justify-center">
-        <div>
-          <img src={introBannerIcon} alt="Intro-Banner-Icon" className="lg:ml-4 md:ml-3 ml-0" />
+        <div className="text-center">
+          <img src={introBannerIcon} alt="Intro-Banner-Icon" className="mx-auto mb-2" />
           <h2 className="font-medium lg:text-5xl md:text-4xl text-3xl">Shop</h2>
-          <div className="flex items-center py-2">
+          <div className="flex items-center justify-center py-2">
             <h6 className="lg:text-base md:text-sm text-xs font-semibold">Home</h6>
             &nbsp;&gt;&nbsp;
             <h6 className="lg:text-base md:text-sm text-xs font-light">Shop</h6>
@@ -36,13 +35,14 @@ function Shop() {
       <h2 className="text-4xl font-semibold text-center font-poppins my-4">Our Products</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-        {data.map((product) => (
+        {products.map((product) => (
           <Link
             key={product.id}
             to={`/cart/${product.id}`}
             className="bg-white rounded-md shadow p-4 flex flex-col group no-underline"
           >
-            <div className="relative h-64"> {/* ← Use aspect-w-4 aspect-h-3 if plugin added */}
+            {/* Image */}
+            <div className="relative h-64">
               <img
                 src={product.images[0]}
                 alt={product.title}
@@ -73,14 +73,18 @@ function Shop() {
             <div className="mt-4">
               <h4 className="font-semibold text-lg">{product.title}</h4>
               <h6 className="text-sm text-gray-500">ID: {product.id}</h6>
-              <h6 className="text-sm text-gray-500 capitalize">Category: {product.category?.name}</h6>
+              <h6 className="text-sm text-gray-500 capitalize">
+                Category: {product.category?.name}
+              </h6>
               <p className="text-sm text-gray-600">{product.description.slice(0, 40)}...</p>
+
+              {/* Price + Button */}
               <div className="flex items-center gap-4 mt-2 flex-wrap">
                 <h5 className="text-lg font-semibold">${product.price}</h5>
                 <h6 className="text-sm text-[#B0B0B0] line-through">
                   ${Math.round(product.price * 1.4)}
                 </h6>
-                <button className="block lg:hidden bg-gray-800 text-white font-semibold text-sm px-4 py-2 rounded shadow transition-colors duration-300 hover:bg-[#B88E2F] flex items-center gap-2 group">
+                <button className="block lg:hidden bg-gray-800 text-white font-semibold text-sm px-4 py-2 rounded shadow hover:bg-[#B88E2F] flex items-center gap-2 group">
                   Add to Cart
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
