@@ -62,33 +62,54 @@ function Home() {
         <Slider />
 
         {/* Varieties Section */}
-        <section className="varieties-section">
-          <div className="container max-w-[1183px] mx-auto my-10">
-            <div>
-              <h3 className="font-bold lg:text-[2rem] md:text-[1.5rem] text-[1rem] text-center">
-                Browse The Range
-              </h3>
-              <p className="text-center lg:text-[1.25rem] md:text-base text-[0.7rem]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
+<section className="varieties-section">
+  <div className="container max-w-[1183px] mx-auto my-10 px-4">
+    <div>
+      <h3 className="font-bold lg:text-[2rem] md:text-[1.5rem] text-[1rem] text-center">
+        Browse The Range
+      </h3>
+      <p className="text-center lg:text-[1.25rem] md:text-base text-[0.7rem]">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+    </div>
 
-            <div className="grid lg:grid-cols-3 grid-cols-2 gap-5 my-5">
-              <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
-                <img src={varietyOne} alt="Dining" className="mx-auto w-100" width={800} height={500} />
-                <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">Dining</h4>
-              </div>
-              <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
-                <img src={varietyTwo} alt="Living" className="mx-auto w-100" width={800} height={500} />
-                <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">Living</h4>
-              </div>
-              <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
-                <img src={varietyThree} alt="Bedroom" className="mx-auto w-100" width={800} height={500} />
-                <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">Bedroom</h4>
-              </div>
-            </div>
-          </div>
-        </section>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
+      <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+        <img
+          src={varietyOne}
+          alt="Dining"
+          className="w-full h-auto object-cover rounded-md"
+        />
+        <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
+          Dining
+        </h4>
+      </div>
+
+      <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+        <img
+          src={varietyTwo}
+          alt="Living"
+          className="w-full h-auto object-cover rounded-md"
+        />
+        <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
+          Living
+        </h4>
+      </div>
+
+      <div className="hover:scale-105 hover:shadow-lg transition-transform duration-300">
+        <img
+          src={varietyThree}
+          alt="Bedroom"
+          className="w-full h-auto object-cover rounded-md"
+        />
+        <h4 className="text-center lg:pt-5 pt-2 lg:text-2xl text-base font-semibold">
+          Bedroom
+        </h4>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* Featured Products */}
         <h2 className="text-4xl font-semibold text-center font-poppins my-4">Our Products</h2>
@@ -97,7 +118,7 @@ function Home() {
           {products.map((product) => (
             <Link
               key={product.id}
-              to={`/cart/${product.id}`}
+              to={`/product/${product.id}`}
               className="bg-white rounded-md shadow p-4 flex flex-col group"
             >
               <div className="relative aspect-w-4 aspect-h-3">

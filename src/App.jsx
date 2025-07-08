@@ -1,8 +1,10 @@
 import React from "react";
 import "font-awesome/css/font-awesome.min.css";
+import { Routes, Route } from "react-router-dom";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
@@ -13,9 +15,10 @@ import Payment from "./pages/Payment";
 import Returns from "./pages/Returns";
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Admin from "./pages/Admin";
-import Cart from "./pages/Cart";
 import Checkout from './pages/Checkout';
 import NotFound from "./pages/NotFound";
+import SingleProduct from "./pages/SingleProduct";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -26,6 +29,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/cart/:id" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/users" element={<User />}>

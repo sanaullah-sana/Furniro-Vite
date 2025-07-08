@@ -38,7 +38,7 @@ function Shop() {
         {products.map((product) => (
           <Link
             key={product.id}
-            to={`/cart/${product.id}`}
+            to={`/product/${product.id}`}
             className="bg-white rounded-md shadow p-4 flex flex-col group no-underline"
           >
             {/* Image */}

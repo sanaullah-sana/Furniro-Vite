@@ -96,7 +96,7 @@ function Cart() {
         <div className="mt-4">
           <button
             onClick={() => navigate('/checkout')}
-            className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded font-semibold"
+            className="cursor-pointer w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded font-semibold"
           >
             Proceed to Checkout
           </button>
