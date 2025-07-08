@@ -15,6 +15,7 @@ function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
+    <header className="bg-white">
     <nav className="bg-white border-gray-200 dark:bg-gray-900 relative">
       <div className="max-w-screen-xl mx-auto p-4 flex items-center justify-between">
         {/* Logo */}
@@ -145,6 +146,7 @@ function Header() {
         </div>
       )}
     </nav>
+    </header>
   );
 }
 
